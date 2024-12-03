@@ -1,9 +1,6 @@
 package com.leclowndu93150.demagnetizer;
 
-import com.leclowndu93150.demagnetizer.registries.DMBlockEntityTypes;
-import com.leclowndu93150.demagnetizer.registries.DMBlocks;
-import com.leclowndu93150.demagnetizer.registries.DMCreativeTabs;
-import com.leclowndu93150.demagnetizer.registries.DMItems;
+import com.leclowndu93150.demagnetizer.registries.*;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -25,9 +22,9 @@ public class DMMain {
         DMItems.ITEMS.register(modEventBus);
         DMCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         DMBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
+        DMMenuTypes.MENU_TYPES.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, DMConfig.SPEC);
     }
-
 
 }

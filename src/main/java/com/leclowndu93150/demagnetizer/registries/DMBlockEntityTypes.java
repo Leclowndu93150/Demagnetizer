@@ -11,6 +11,7 @@ public class DMBlockEntityTypes {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, DMMain.MODID);
 
-    public static final RegistryObject<BlockEntityType<DemagnetizerBlockEntity>> DEMAGNETIZER = BLOCK_ENTITY_TYPES.register("demagnetizer", () -> BlockEntityType.Builder.of(DemagnetizerBlockEntity::new, validBlocks).build(null));
+    public static final RegistryObject<BlockEntityType<DemagnetizerBlockEntity>> DEMAGNETIZER = BLOCK_ENTITY_TYPES.register("demagnetizer",
+            () -> BlockEntityType.Builder.of(DemagnetizerBlockEntity::new, DMBlocks.DEMAGNETIZER.get()).build(null));
 
 }

@@ -1,5 +1,6 @@
 package com.leclowndu93150.demagnetizer.content.blockentity;
 
+import com.leclowndu93150.demagnetizer.content.menu.DemagnetizerMenu;
 import com.leclowndu93150.demagnetizer.registries.DMBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -25,6 +26,6 @@ public class DemagnetizerBlockEntity extends BlockEntity implements MenuProvider
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return null;
+        return new DemagnetizerMenu(i, inventory, this);
     }
 }
