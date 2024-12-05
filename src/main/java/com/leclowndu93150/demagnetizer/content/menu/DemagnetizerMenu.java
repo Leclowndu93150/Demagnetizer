@@ -14,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 public class DemagnetizerMenu extends AbstractContainerMenu {
-    private final DemagnetizerBlockEntity be;
+    public final DemagnetizerBlockEntity be;
     private final ContainerLevelAccess levelAccess;
     private final Player player;
 
@@ -54,4 +54,5 @@ public class DemagnetizerMenu extends AbstractContainerMenu {
     public boolean stillValid(Player player) {
         return stillValid(levelAccess, player, DMBlocks.DEMAGNETIZER.get());
     }
+
 }
