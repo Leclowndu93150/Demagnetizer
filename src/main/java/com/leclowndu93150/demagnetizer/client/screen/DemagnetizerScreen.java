@@ -5,6 +5,9 @@ import com.leclowndu93150.demagnetizer.content.blockentity.DemagnetizerBlockEnti
 import com.leclowndu93150.demagnetizer.content.menu.DemagnetizerMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractSliderButton;
+import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.narration.NarratableEntry;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -42,12 +45,26 @@ public class DemagnetizerScreen extends AbstractContainerScreen<DemagnetizerMenu
     }
 
     @Override
-    protected void init() {
-        addWidget(new RangeSlider(getGuiLeft() + 7, getGuiTop() + 16, blockEntity.getMaxRange(), blockEntity.getRange()));
-        super.init();
+    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        int titleX = (this.imageWidth - this.font.width(this.title)) / 2;
+        guiGraphics.drawString(this.font, this.title, titleX, 6, 0x404040, false);
+        guiGraphics.drawString(this.font, this.playerInventoryTitle, 8, this.imageHeight - 96 + 2, 0x404040, false);
     }
 
-    private static class RangeSlider extends AbstractSliderButton {
+    @Override
+    protected <T extends GuiEventListener & Renderable & NarratableEntry> T addRenderableWidget(T p_169406_) {
+        return super.addRenderableWidget(p_169406_);
+    }
+
+
+    @Override
+    protected void init() {
+        super.init();
+        addRenderableWidget(new RangeSlider(getGuiLeft() + 7, getGuiTop() + 16, blockEntity.getMaxRange(), blockEntity.getRange()));
+    }
+
+
+    private class RangeSlider extends AbstractSliderButton {
         private int scaledValue;
         private final int maxValue;
         private final static int minValue = 1;
@@ -61,15 +78,15 @@ public class DemagnetizerScreen extends AbstractContainerScreen<DemagnetizerMenu
 
         @Override
         protected void updateMessage() {
-            setMessage(Component.literal("label." + DMMain.MODID + ".demagnetizer.range").append(": " + scaledValue));
+            visible = true;
+            active = true;
+            setMessage(Component.literal("Range").append(": " + scaledValue));
         }
 
         @Override
         protected void applyValue() {
-            /*
-            scaledValue = (int) (Math.round(sliderValue * (maxValue - minValue)) + minValue);
-            this.blockEntity.setRange(scaledValue);
-             */
+            scaledValue = (int) (Math.round(value * (maxValue - minValue)) + minValue);
+            blockEntity.setRange(scaledValue);
         }
     }
 
