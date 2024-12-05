@@ -72,6 +72,10 @@ public class DemagnetizerBlockEntity extends BlockEntity implements MenuProvider
         return scanArea;
     }
 
+    private void updateBoundingBox() {
+        scanArea = new AABB(worldPosition).inflate(range);
+    }
+
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
@@ -90,6 +94,34 @@ public class DemagnetizerBlockEntity extends BlockEntity implements MenuProvider
 
     public int setRange(int range) {
         this.range = range;
+        updateBoundingBox();
         return range;
     }
+
+    public RedstoneStatus getRedstoneSetting() {
+        return redstoneSetting;
+    }
+
+    public RedstoneStatus setRedstoneSetting(RedstoneStatus redstoneSetting) {
+        this.redstoneSetting = redstoneSetting;
+        return redstoneSetting;
+    }
+
+    public int getFilterSize(){
+        return 9;
+    }
+
+    public boolean isWhitelist() {
+        return filtersWhitelist;
+    }
+
+    public void setWhitelist(boolean whitelist) {
+        if (getFilterSize() > 0) {
+            this.filtersWhitelist = whitelist;
+        } else {
+            this.filtersWhitelist = false;
+        }
+    }
+
+
 }
